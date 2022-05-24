@@ -1,0 +1,53 @@
+{% extends 'home/index.html' %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+</head>
+<body>
+
+    <!-- creating item cart -->
+    
+    {% block content %}
+
+    {% for item in cart %}
+    {% with product=item.product %}
+        
+    <img src="{{ product.image.url }}" alt="" width="150px">
+
+    <p>Quantity: {{ item.quantity }}</p>
+    <form action="{% url 'cart:cart_remove' product.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">remove</button>
+        
+    </form>
+
+    <form action="{% url 'cart:cart_add' product.id %}" method="post">
+        {% csrf_token %}
+        {{ item.update_quantity_form.quantity}}
+        {{ item.update_quantity_form.override }}
+        <button type="submit">update</button>
+    </form>
+    {% endwith %}
+
+              
+    {% endfor %}
+
+    <form action="{% url 'order:order_create' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">checkout</button>
+    </form>
+
+    <a href="{% url 'shop:product_list' %}"> continue shopping</a>
+        
+        
+    {% endblock content %}     
+
+    
+    
+    
+</body>
+</html>

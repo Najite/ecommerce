@@ -1,0 +1,33 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>payment</title>
+</head>
+<body>
+    <form>
+        <h3>Your order is {{ total_cost }}</h3>
+
+        <button type="button" onclick="makepayment()">Pay Now</button>
+        <script src="https://checkout.flutterwave.com/v3.js"></script>
+        <script>
+        
+            function makepayment(){
+                FlutterwaveCheckout({
+                    public_key: 'FLWPUBK_TEST-7818165f14ad0120d70994eb02de1b83-X',
+                    'tx_ref': ''+ str(math.floor(10000000 + random.random()*90000000)),
+                    'amount': 300,
+                    'redirect_url': 'http://127.0.0.1:8000/callback',
+                    'payment_option': 'card',
+
+                })
+            }
+
+    </script>
+
+    
+    </form>
+    
+</body>
+</html>

@@ -1,0 +1,26 @@
+{% extends 'home/base.html' %}
+
+
+{% block content %}
+
+
+{% for product in products %}
+    <a href="{{ product.get_absolute_url }}">
+        <img src="{{ product.image.url }}" alt=""></a>
+
+        
+        {% if product.disount %}
+
+        <p>{{ discount }}</p>
+
+        {% else %}
+
+        <p>{{ product.price }}</p>
+            
+        {% endif %}
+            
+{% endfor %}
+    
+    
+{% endblock content %}
+    

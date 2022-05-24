@@ -1,0 +1,34 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>order</h1>
+    {% for item in cart %}
+    
+    {% with product=item.product %}
+    <p>{{ item.quantity }}</p>
+    <p>{{ item.product.name }}</p>
+    <img src="{{ product.image.url }}" alt="" width="150">
+
+    Total: {{ cart.get_total_price }}
+        
+    {% endwith %}
+        
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <button type="submit">Submit</button>
+    </form>
+   
+        
+    {% endfor %}
+        
+    
+</body>
+</html>
